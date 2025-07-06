@@ -1,0 +1,1 @@
+export const BASE_URL = 'http://localhost:30000/api'; // 你的後端API的網址
