@@ -52,6 +52,9 @@ export default function DashboardLayout() {
         <Link to="/profile" style={{ color: '#fff', textDecoration: 'none', padding: '0.5rem 1rem' }}>
           帳戶資料
         </Link>
+        <Link to="/k8s" style={{ color: '#fff', textDecoration: 'none', padding: '0.5rem 1rem' }}>
+          K8s 工具
+        </Link>
         <button onClick={handleLogout} style={{ color: '#fff', background: 'none', border: 'none', textAlign: 'left', padding: '0.5rem 1rem', cursor: 'pointer' }}>
           登出
         </button>

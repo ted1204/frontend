@@ -39,6 +39,8 @@ const XtermTerminal: React.FC<XtermTerminalProps> = ({
       },
       fontFamily: 'monospace',
       fontSize: 14,
+      convertEol: true, 
+      disableStdin: false, 
     });
 
     fitAddon.current = new FitAddon();
@@ -69,6 +71,10 @@ const XtermTerminal: React.FC<XtermTerminalProps> = ({
         rows: xterm.current?.rows,
       }));
     };
+
+    xterm.current.onData((data) => {
+      console.log('Key pressed:', data);
+    });
 
     socket.onclose = () => {
       onMessage?.(`已斷開與 ${podName}/${containerName} 的連線`);

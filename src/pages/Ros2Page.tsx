@@ -9,8 +9,8 @@ export default function Ros2Page() {
   const [podName, setPodName] = useState<string | null>(null);
   const [containerName, setContainerName] = useState<string | null>(null);
 
-  const backendWsBase = 'ws://localhost:30000'; // 後端 WS 服務地址
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0ZXN0Iiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTE5ODA2NjAsImV4cCI6MTc1MjA2NzA2MH0.GOaiTtrUiDFGag7xAPbZdLpgBhahGZIPt1b4xGs666Q'; // 請改成你的 token 來源
+  const backendWsBase = 'ws://10.121.124.22:30000'; // 後端 WS 服務地址
+  const token = localStorage.getItem('token') || '';
 
   // 通用 API 呼叫函式
   const handleApi = async (fn: (...args: any[]) => Promise<any>, ...args: any[]) => {
@@ -35,7 +35,6 @@ export default function Ros2Page() {
       {/* 左邊控制區 */}
       <div className={styles.controlPanel}>
         <h2>ROS2 控制面板</h2>
-        {/* 省略API按鈕區塊，跟你原本一樣 */}
         <div>
           <button className={styles.button} onClick={() => handleApi(ros2Api.createDiscovery)}>建立 Discovery</button>
           <button className={styles.button} onClick={() => handleApi(ros2Api.deleteDiscovery)}>刪除 Discovery</button>
@@ -49,14 +48,18 @@ export default function Ros2Page() {
           />
           <button className={styles.button} onClick={() => handleApi(ros2Api.createSlamUnity, pvcname)}>建立 SLAM Unity</button>
           <button className={styles.button} onClick={() => handleApi(ros2Api.deleteSlamUnity)}>刪除 SLAM Unity</button>
+          <button className={styles.button} onClick={() => handleApi(ros2Api.createYolo, pvcname)}>建立 YOLO</button>
+          <button className={styles.button} onClick={() => handleApi(ros2Api.deleteYolo)}>刪除 YOLO</button>
+          <button className={styles.button} onClick={() => handleApi(ros2Api.createCarControl, pvcname)}>建立 Car-Control</button>
+          <button className={styles.button} onClick={() => handleApi(ros2Api.deleteCarControl)}>刪除 Car-Control</button>
         </div>
         {/* 其他按鈕同理... */}
 
         <hr style={{ border: 'none', borderTop: '1px solid #444', margin: '16px 0' }} />
         <h3>終端機連線</h3>
         <div>
-          <button className={styles.button} onClick={() => connectToPodTerminal('ros2-yolo', 'yolo')}>進入 YOLO Pod</button>
-          <button className={styles.button} onClick={() => connectToPodTerminal('ros2-pros-car', 'car-control')}>進入 Car-Control Pod</button>
+          <button className={styles.button} onClick={() => connectToPodTerminal('ros2-yolo', 'pros-cameraapi')}>進入 YOLO Pod</button>
+          <button className={styles.button} onClick={() => connectToPodTerminal('ros2-car-control', 'pros-car')}>進入 Car-Control Pod</button>
         </div>
         <div style={{ marginTop: 20, color: 'lightgreen' }}>{message}</div>
       </div>
@@ -69,7 +72,7 @@ export default function Ros2Page() {
             containerName={containerName}
             backendWsBase={backendWsBase}
             token={token}
-            onMessage={setMessage}
+            // onMessage={setMessage}
           />
         ) : (
           <div style={{ color: '#888', padding: 20 }}>請選擇一個 Pod 連線</div>
