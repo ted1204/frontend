@@ -1,11 +1,12 @@
 import { BASE_URL } from '../config/config';
 
 async function callRos2Api(method: 'POST' | 'DELETE', path: string, body?: any) {
+  const token = localStorage.getItem('token');
   const res = await fetch(`${BASE_URL}${path}`, {
     method,
     headers: {
       'Content-Type': 'application/json',
-      // 如果有 token 認證, 這裡加上 Authorization
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
     body: body ? JSON.stringify(body) : undefined,
     credentials: 'include', // 如果有 cookie 認證

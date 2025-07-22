@@ -12,7 +12,7 @@ export default function LoginPage() {
     try {
       const data = await loginUser(username, password);
       localStorage.setItem('token', data.token);
-      navigate('/notebooks');
+      navigate('/ros2');
     } catch (err) {
       console.error(err);
       setError('Login failed. Check username or password.');

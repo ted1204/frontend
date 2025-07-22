@@ -65,16 +65,17 @@ const XtermTerminal: React.FC<XtermTerminalProps> = ({
       xterm.current?.writeln(`\x1b[32mConnected to ${podName}/${containerName}\x1b[0m\r\n`);
       fitAddon.current?.fit();
       // 傳送終端機尺寸給後端
+      // console.log("send resize:", {
+      //   type: 'resize',
+      //   cols: xterm.current?.cols,
+      //   rows: xterm.current?.rows,
+      // })
       socket.send(JSON.stringify({
         type: 'resize',
         cols: xterm.current?.cols,
         rows: xterm.current?.rows,
       }));
     };
-
-    xterm.current.onData((data) => {
-      console.log('Key pressed:', data);
-    });
 
     socket.onclose = () => {
       onMessage?.(`已斷開與 ${podName}/${containerName} 的連線`);

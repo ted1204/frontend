@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../api/user';
+import { authService } from '../services/authService';
 
 export default function RegisterPage() {
   const [username, setUsername] = useState('');
@@ -11,10 +12,16 @@ export default function RegisterPage() {
 
   const handleRegister = async () => {
     try {
-      await registerUser(username, password);
-      setSuccess('Registered successfully! Please login.');
+      const res = await registerUser(username, password); // 假設會回傳 { token }
+      if (res.token) {
+        authService.login(res.token); // 儲存 JWT
+        setSuccess('Registered & logged in!');
+        navigate('/'); // 跳轉到首頁或其他頁
+      } else {
+        setSuccess('Registered successfully! Please login.');
+        navigate('/login');
+      }
       setError('');
-      navigate('/login');
     } catch (err) {
       console.error(err);
       setError('Registration failed. Username might be taken.');

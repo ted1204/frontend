@@ -2,12 +2,12 @@ import axios from 'axios';
 import { BASE_URL } from '../config/config';
 
 export async function registerUser(username: string, password: string) {
-  const res = await axios.post(`${BASE_URL}/users/register`, { username, password });
+  const res = await axios.post(`http://10.121.124.22:30080/register`, { username, password });
   return res.data;
 }
 
 export async function loginUser(username: string, password: string) {
-  const res = await axios.post(`${BASE_URL}/users/login`, { username, password });
+  const res = await axios.post(`http://10.121.124.22:30080/login`, { username, password });
   return res.data;
 }
 

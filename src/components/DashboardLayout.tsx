@@ -43,17 +43,20 @@ export default function DashboardLayout() {
         <div style={{ padding: '0 1rem', marginBottom: '2rem', fontWeight: 'bold', fontSize: '1.2rem' }}>
           AI platform
         </div>
-        <Link to="/notebooks" style={{ color: '#fff', textDecoration: 'none', padding: '0.5rem 1rem' }}>
+        {/* <Link to="/notebooks" style={{ color: '#fff', textDecoration: 'none', padding: '0.5rem 1rem' }}>
           數據面板
-        </Link>
+        </Link> */}
         <Link to="/ros2" style={{ color: '#fff', textDecoration: 'none', padding: '0.5rem 1rem' }}>
           ROS2 控制面板
         </Link>
-        <Link to="/profile" style={{ color: '#fff', textDecoration: 'none', padding: '0.5rem 1rem' }}>
+        {/* <Link to="/profile" style={{ color: '#fff', textDecoration: 'none', padding: '0.5rem 1rem' }}>
           帳戶資料
         </Link>
         <Link to="/k8s" style={{ color: '#fff', textDecoration: 'none', padding: '0.5rem 1rem' }}>
           K8s 工具
+        </Link> */}
+        <Link to="/ros2-status" style={{ color: '#fff', textDecoration: 'none', padding: '0.5rem 1rem' }}>
+          ROS2 狀態頁面
         </Link>
         <button onClick={handleLogout} style={{ color: '#fff', background: 'none', border: 'none', textAlign: 'left', padding: '0.5rem 1rem', cursor: 'pointer' }}>
           登出

@@ -6,6 +6,7 @@ import RegisterPage from './pages/RegisterPage';
 import DashboardLayout from './components/DashboardLayout';
 import Ros2Page from './pages/Ros2Page';
 import K8sPage from './pages/K8sPage';
+import Ros2StatusPage from './pages/Ros2StatusPage';
 
 
 
@@ -20,12 +21,13 @@ function App() {
           <Route path="notebooks" element={<NotebookPage />} />
           <Route path="ros2" element={<Ros2Page />} />
           <Route path="k8s" element={<K8sPage />} />
+          <Route path="/ros2-status" element={<Ros2StatusPage />} />
           {/* 你可以再新增其他頁面 */}
           {/* <Route path="profile" element={<ProfilePage />} /> */}
           {/* <Route index element={<Navigate to="notebooks" replace />} /> */}
         </Route>
         {/* 根路徑直接導到 notebooks */}
-        <Route path="*" element={<Navigate to="/notebooks" replace />} />
+        <Route path="*" element={<Navigate to="/ros2" replace />} />
       </Routes>
     </BrowserRouter>
   );
